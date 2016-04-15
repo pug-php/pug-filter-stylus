@@ -22,7 +22,7 @@ class StylusEngine extends Stylus
             return $matches[1] . $this->insertVariables($matches[2]);
         } else {
             if (preg_match('~[,\s]~', $args)) {
-                preg_match_all('~(\$|\b)[\$a-zA-Z0-9_-]+(\$|\b)~', $args, $matches);
+                preg_match_all('~(\$|\b)[\$a-zA-Z_][\$a-zA-Z0-9_-]*(\$|\b)~', $args, $matches);
 
                 foreach ($matches[0] as $arg) {
                     if (isset($this->vars[$arg])) {
@@ -32,7 +32,7 @@ class StylusEngine extends Stylus
                 }
             } else if (isset($this->vars[$args])) {
                 $args = $this->vars[$args];
-            } else {
+            } else if(preg_match('~^\s*[\$a-zA-Z_]~', $args)) {
                 $args = '<' . '?php echo isset($' . $args . ') ? $' . $args . ' : ' . var_export($args, true) . ' ?>';
             }
 
