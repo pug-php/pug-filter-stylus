@@ -32,7 +32,7 @@ class StylusEngine extends Stylus
                 }
             } else if (isset($this->vars[$args])) {
                 $args = $this->vars[$args];
-            } else if(preg_match('~^\s*[\$a-zA-Z_]~', $args)) {
+            } else if(preg_match('~^\s*(?<!\d)[\$a-zA-Z_]~', $args)) {
                 $args = '<' . '?php echo isset($' . $args . ') ? $' . $args . ' : ' . var_export($args, true) . ' ?>';
             }
 
