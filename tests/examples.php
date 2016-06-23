@@ -1,6 +1,6 @@
 <?php
 
-use Jade\Jade;
+use Pug\Pug;
 
 class ExamplesTest extends \PHPUnit_Framework_TestCase {
 
@@ -10,8 +10,8 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
 
         $examples = __DIR__ . '/../examples';
         foreach (scandir($examples) as $file) {
-            if (substr($file, -5) === '.jade') {
-                $cases[] = array($examples . '/' . substr($file, 0, -5) . '.html', $examples . '/' . $file);
+            if (substr($file, -4) === '.pug') {
+                $cases[] = array($examples . '/' . substr($file, 0, -4) . '.html', $examples . '/' . $file);
             }
         }
 
@@ -21,10 +21,10 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
     /**
      * @dataProvider caseProvider
      */
-    public function testJadeGeneration($htmlFile, $jadeFile) {
+    public function testPugGeneration($htmlFile, $pugFile) {
 
-        $jade = new Jade();
-        $renderedHtml = $jade->render($jadeFile, array(
+        $pug = new Pug();
+        $renderedHtml = $pug->render($pugFile, array(
             'color' => 'yellow',
         ));
         $htmlFileContents = file_get_contents($htmlFile);
@@ -32,11 +32,11 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
         $actual = trim(preg_replace('`\s+`', '', $renderedHtml));
         $expected = trim(preg_replace('`\s+`', '', $htmlFileContents));
 
-        $this->assertSame($expected, $actual, $jadeFile . ' should match ' . $htmlFile . ' as html');
+        $this->assertSame($expected, $actual, $pugFile . ' should match ' . $htmlFile . ' as html');
 
         $actual = trim(preg_replace('`\s+`', ' ', strip_tags($renderedHtml)));
         $expected = trim(preg_replace('`\s+`', ' ', strip_tags($htmlFileContents)));
 
-        $this->assertSame($expected, $actual, $jadeFile . ' should match ' . $htmlFile . ' as text');
+        $this->assertSame($expected, $actual, $pugFile . ' should match ' . $htmlFile . ' as text');
     }
 }

@@ -1,5 +1,8 @@
 {
-    "name": "kylekatarnls/jade-filter-stylus",
+    "name": "pug-php/pug-filter-stylus",
+    "replace": {
+        "kylekatarnls/jade-filter-stylus": "self.version"
+    },
     "description": "Render stylus code as compiled CSS in a style tag",
     "type": "library",
     "license": "MIT",
@@ -10,7 +13,7 @@
         }
     ],
     "require": {
-        "kylekatarnls/jade-php": "^1.8",
+        "pug-php/pug": "^1.11",
         "kylekatarnls/stylus": "^1.0"
     },
     "require-dev": {
@@ -18,7 +21,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Jade": "src/"
+            "Pug": "src/"
         }
     }
 }
