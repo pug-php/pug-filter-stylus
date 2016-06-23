@@ -1,10 +1,11 @@
 <?php
 
-namespace Jade\Filter;
+namespace Pug\Filter;
 
 use Jade\Compiler;
+use Jade\Filter\AbstractFilter;
 use Jade\Nodes\Filter;
-use Jade\Stylus\StylusEngine as StylusEngine;
+use Pug\Stylus\StylusEngine as StylusEngine;
 
 class Stylus extends AbstractFilter
 {
@@ -14,7 +15,7 @@ class Stylus extends AbstractFilter
         $indent = strlen($nodes[0]->value) - strlen(ltrim($nodes[0]->value));
         $code = '';
         foreach ($nodes as $line) {
-            $code .= substr($line->value, $indent) . "\n";
+            $code .= substr($compiler->interpolate($line->value), $indent) . "\n";
         }
         $stylus = new StylusEngine();
 

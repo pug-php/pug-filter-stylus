@@ -1,11 +1,11 @@
-# jade-filter-stylus
+# pug-filter-stylus
 
 This template:
-```jade
+```pug
 //- set from php controller
 - $prev = $color
 
-//- set in the jade template
+//- set in the pug template
 - $color = 'red'
 
 head
@@ -28,8 +28,8 @@ body
 
 with data like this:
 ```php
-$jade = new Jade();
-$jade->render('template.jade', array(
+$pug = new Pug();
+$pug->render('template.pug', array(
     'color' => 'red',
 ));
 ```
