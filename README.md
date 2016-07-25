@@ -10,8 +10,9 @@ This template:
 
 head
   :stylus
+    prev = yellow
     p
-      color color
+      color #{color}
       a
         color #{prev}
       em
