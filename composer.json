@@ -13,8 +13,8 @@
         }
     ],
     "require": {
-        "pug-php/pug": "^1.11",
-        "kylekatarnls/stylus": "^1.0"
+        "pug-php/pug": "^2.0",
+        "nodejs-php-fallback/stylus": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": ">=4.0"

@@ -6,18 +6,24 @@
 
 head
   :stylus
+    prev = yellow
     p
       width 200px
-      color color
+      color #{color}
       a
         color #{prev}
       em
         color prev
 body
   p
-    | I'm 
+    | I'm
+    =" "
     =color
-    |  but my links are 
+    =" "
+    | but my links are
+    =" "
     a=prev
-    |  and my quotes are 
+    =" "
+    | and my quotes are
+    =" "
     em=prev
