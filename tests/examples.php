@@ -18,6 +18,16 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
         return $cases;
     }
 
+    protected function simplifyHtml($html)
+    {
+        return trim(str_replace('#ff0', 'yellow', preg_replace('`\s+`', '', $html)));
+    }
+
+    protected function simplifyText($html)
+    {
+        return trim(str_replace('#ff0', 'yellow', preg_replace('`\s+`', ' ', strip_tags($html))));
+    }
+
     /**
      * @dataProvider caseProvider
      */
@@ -29,13 +39,13 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
         ));
         $htmlFileContents = file_get_contents($htmlFile);
 
-        $actual = trim(preg_replace('`\s+`', '', $renderedHtml));
-        $expected = trim(preg_replace('`\s+`', '', $htmlFileContents));
+        $actual = static::simplifyHtml($renderedHtml);
+        $expected = static::simplifyHtml($htmlFileContents);
 
         $this->assertSame($expected, $actual, $pugFile . ' should match ' . $htmlFile . ' as html');
 
-        $actual = trim(preg_replace('`\s+`', ' ', strip_tags($renderedHtml)));
-        $expected = trim(preg_replace('`\s+`', ' ', strip_tags($htmlFileContents)));
+        $actual = static::simplifyText($renderedHtml);
+        $expected = static::simplifyText($htmlFileContents);
 
         $this->assertSame($expected, $actual, $pugFile . ' should match ' . $htmlFile . ' as text');
     }
