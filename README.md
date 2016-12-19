@@ -1,5 +1,11 @@
 # pug-filter-stylus
 
+[![Latest Stable Version](https://poser.pugx.org/pug-php/pug-filter-stylus/v/stable.png)](https://packagist.org/packages/pug-php/pug-filter-stylus)
+[![Build Status](https://travis-ci.org/pug-php/pug-filter-stylus.svg?branch=master)](https://travis-ci.org/pug-php/pug-filter-stylus)
+[![Code Climate](https://codeclimate.com/github/pug-php/pug-filter-stylus/badges/gpa.svg)](https://codeclimate.com/github/pug-php/pug-filter-stylus)
+[![Test Coverage](https://codeclimate.com/github/pug-php/pug-filter-stylus/badges/coverage.svg)](https://codeclimate.com/github/pug-php/pug-filter-stylus/coverage)
+[![StyleCI](https://styleci.io/repos/61811961/shield?branch=master)](https://styleci.io/repos/61811961)
+
 This template:
 ```pug
 //- set from php controller
