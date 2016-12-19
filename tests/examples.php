@@ -2,10 +2,10 @@
 
 use Pug\Pug;
 
-class ExamplesTest extends \PHPUnit_Framework_TestCase {
-
-    public function caseProvider() {
-
+class ExamplesTest extends \PHPUnit_Framework_TestCase
+{
+    public function caseProvider()
+    {
         $cases = array();
 
         $examples = __DIR__ . '/../examples';
@@ -31,8 +31,8 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
     /**
      * @dataProvider caseProvider
      */
-    public function testPugGeneration($htmlFile, $pugFile) {
-
+    public function testPugGeneration($htmlFile, $pugFile)
+    {
         $pug = new Pug();
         $renderedHtml = $pug->render($pugFile, array(
             'color' => 'yellow',
