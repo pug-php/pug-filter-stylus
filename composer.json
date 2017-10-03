@@ -13,7 +13,7 @@
         }
     ],
     "require": {
-        "pug-php/pug": "^2.0",
+        "pug-php/pug": "^2.0 || ^3.0",
         "nodejs-php-fallback/stylus": "^1.0"
     },
     "require-dev": {

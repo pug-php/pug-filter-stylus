@@ -34,18 +34,29 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase
     public function testPugGeneration($htmlFile, $pugFile)
     {
         $pug = new Pug();
-        $renderedHtml = $pug->render($pugFile, array(
+        $renderFile = method_exists($pug, 'renderFile')
+            ? array($pug, 'renderFile')
+            : array($pug, 'render');
+        $renderedHtml = call_user_func($renderFile, $pugFile, array(
             'color' => 'yellow',
         ));
         $htmlFileContents = file_get_contents($htmlFile);
 
-        $actual = static::simplifyHtml($renderedHtml);
-        $expected = static::simplifyHtml($htmlFileContents);
+        $actual = str_replace('/>', '>', $renderedHtml);
+        $expected = str_replace('/>', '>', $htmlFileContents);
+        $actual = str_replace('_', '', strip_tags($actual));
+        $expected = str_replace('_', '', strip_tags($expected));
+        $actual = trim(preg_replace('`\s+`', ' ', $actual));
+        $expected = trim(preg_replace('`\s+`', ' ', $expected));
 
         $this->assertSame($expected, $actual, $pugFile . ' should match ' . $htmlFile . ' as html');
 
-        $actual = static::simplifyText($renderedHtml);
-        $expected = static::simplifyText($htmlFileContents);
+        $actual = preg_replace('/<br[^>]*>/', "\n", $renderedHtml);
+        $expected = preg_replace('/<br[^>]*>/', "\n", $htmlFileContents);
+        $actual = str_replace('_', '', strip_tags($actual));
+        $expected = str_replace('_', '', strip_tags($expected));
+        $actual = trim(preg_replace('`\s+`', ' ', $actual));
+        $expected = trim(preg_replace('`\s+`', ' ', $expected));
 
         $this->assertSame($expected, $actual, $pugFile . ' should match ' . $htmlFile . ' as text');
     }
