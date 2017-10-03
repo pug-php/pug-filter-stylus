@@ -11,6 +11,9 @@ class Stylus extends AbstractFilter
 
     public function parse($code)
     {
-        return new StylusWrapper(preg_replace('/<\?php.*\?>/', '@css {$0}', $code));
+        $code = preg_replace('/#\{\$?(.*?)\}/', '<?php echo $$1; ?>', $code);
+        $code = preg_replace('/<\?php[\s\S]*?\?>/', '@css {$0}', $code);
+
+        return new StylusWrapper($code);
     }
 }
