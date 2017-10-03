@@ -20,11 +20,17 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase
 
     protected function simplifyHtml($html)
     {
+        $html = str_replace('/>', '>', $html);
+        $html = str_replace('_', '', strip_tags($html));
+
         return trim(str_replace('#ff0', 'yellow', preg_replace('`\s+`', '', $html)));
     }
 
     protected function simplifyText($html)
     {
+        $html = str_replace('/>', '>', $html);
+        $html = str_replace('_', '', strip_tags($html));
+
         return trim(str_replace('#ff0', 'yellow', preg_replace('`\s+`', ' ', strip_tags($html))));
     }
 
@@ -42,21 +48,13 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase
         ));
         $htmlFileContents = file_get_contents($htmlFile);
 
-        $actual = str_replace('/>', '>', $renderedHtml);
-        $expected = str_replace('/>', '>', $htmlFileContents);
-        $actual = str_replace('_', '', strip_tags($actual));
-        $expected = str_replace('_', '', strip_tags($expected));
-        $actual = trim(preg_replace('`\s+`', ' ', $actual));
-        $expected = trim(preg_replace('`\s+`', ' ', $expected));
+        $actual = self::simplifyHtml($renderedHtml);
+        $expected = self::simplifyHtml($htmlFileContents);
 
         $this->assertSame($expected, $actual, $pugFile . ' should match ' . $htmlFile . ' as html');
 
-        $actual = preg_replace('/<br[^>]*>/', "\n", $renderedHtml);
-        $expected = preg_replace('/<br[^>]*>/', "\n", $htmlFileContents);
-        $actual = str_replace('_', '', strip_tags($actual));
-        $expected = str_replace('_', '', strip_tags($expected));
-        $actual = trim(preg_replace('`\s+`', ' ', $actual));
-        $expected = trim(preg_replace('`\s+`', ' ', $expected));
+        $actual = self::simplifyText($renderedHtml);
+        $expected = self::simplifyText($htmlFileContents);
 
         $this->assertSame($expected, $actual, $pugFile . ' should match ' . $htmlFile . ' as text');
     }
