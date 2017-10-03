@@ -2,7 +2,6 @@
 
 namespace Pug\Filter;
 
-use Jade\Filter\AbstractFilter;
 use NodejsPhpFallback\Stylus as StylusWrapper;
 
 class Stylus extends AbstractFilter
