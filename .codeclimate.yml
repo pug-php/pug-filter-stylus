@@ -1,5 +1,6 @@
 ---
-engines:
+version: "2"
+plugins:
   duplication:
     enabled: true
     config:
@@ -10,9 +11,6 @@ engines:
       - php
   fixme:
     enabled: true
-  phpmd:
-    enabled: true
-plugins:
   phpcodesniffer:
     enabled: true
   phpmd:
@@ -21,12 +19,3 @@ plugins:
     enabled: true
   phan:
     enabled: true
-ratings:
-  paths:
-  - "**.inc"
-  - "**.js"
-  - "**.jsx"
-  - "**.module"
-  - "**.php"
-  - "**.py"
-  - "**.rb"
